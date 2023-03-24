@@ -12,6 +12,9 @@
         android:theme="@style/Theme.EnjoyYourMeal"
         tools:targetApi="31">
         <activity
+            android:name=".controleur.ProfilActivity"
+            android:exported="false" />
+        <activity
             android:name=".controleur.MainActivity"
             android:exported="true">
             <intent-filter>
