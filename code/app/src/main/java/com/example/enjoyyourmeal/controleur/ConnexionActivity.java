@@ -48,15 +48,25 @@ public class ConnexionActivity extends AppCompatActivity {
     }
 
     private void seConnecter() {
-        if(pseudo.getText().toString().trim().isEmpty()
-                ||motDePasse.getText().toString().trim().isEmpty()){
+        if(ConnexionActivity.getEditText(pseudo).isEmpty()
+                ||ConnexionActivity.getEditText(motDePasse).isEmpty()){
             pseudo.setError("Merci de remplir tout les champs");
             pseudo.requestFocus();
             motDePasse.setError("Merci de remplir tout les champs");
             motDePasse.requestFocus();
         }
+        else {
+
+        }
     }
 
-
+    /**
+     * 
+     * @param editText un editText
+     * @return le string entre par l'utilsiateur sans espaces au debut et a la fin
+     */
+    public static String getEditText(EditText editText){
+        return editText.getText().toString().trim();
+    }
 
 }

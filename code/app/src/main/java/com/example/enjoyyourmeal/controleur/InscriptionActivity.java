@@ -62,7 +62,7 @@ public class InscriptionActivity extends AppCompatActivity {
     private void inscrire() {
         try {
             inscriptionValide();
-            mUtilisateur = new Utilisateur(pseudo.getText().toString());
+            mUtilisateur = new Utilisateur(ConnexionActivity.getEditText(pseudo));
             Toast.makeText(this, "Vous être bien inscrit!", Toast.LENGTH_LONG).show();
         } catch (pseudoDejaExistantException e) {
             pseudo.setError("le pseudo choisi est déjà pris  ! \nmerci d'en choisir un autre");
@@ -84,13 +84,13 @@ public class InscriptionActivity extends AppCompatActivity {
     private void inscriptionValide() throws pseudoDejaExistantException,
             MotdePasseDifferentException, MotdePasseTropFaibleException, ChampsNonRempliExecption {
 
-        if(pseudo.getText().toString().trim().isEmpty()
-                ||motDePasse.getText().toString().trim().isEmpty()
-                ||confirmMotDePasse.getText().toString().trim().isEmpty())
+        if(ConnexionActivity.getEditText(pseudo).isEmpty()
+                ||ConnexionActivity.getEditText(motDePasse).isEmpty()
+                ||ConnexionActivity.getEditText(confirmMotDePasse).isEmpty())
             throw new ChampsNonRempliExecption();
-        if(motDePasse.getText().toString().length() < TAILLE_MOT_DE_PASSE)
+        if(ConnexionActivity.getEditText(motDePasse).length() < TAILLE_MOT_DE_PASSE)
             throw new MotdePasseTropFaibleException();
-        if (!motDePasse.getText().toString().equals(confirmMotDePasse.getText().toString())) {
+        if (!ConnexionActivity.getEditText(motDePasse).equals(ConnexionActivity.getEditText(confirmMotDePasse))) {
             throw new MotdePasseDifferentException();
         }
     }
