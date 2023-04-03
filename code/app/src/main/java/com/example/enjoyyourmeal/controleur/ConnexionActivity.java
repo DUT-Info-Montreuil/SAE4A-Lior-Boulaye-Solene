@@ -2,23 +2,32 @@ package com.example.enjoyyourmeal.controleur;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.enjoyyourmeal.R;
+import com.example.enjoyyourmeal.modele.Api;
+import com.example.enjoyyourmeal.modele.RetrofitClient;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ConnexionActivity extends AppCompatActivity {
 
-    private EditText pseudo;
-    private EditText motDePasse;
+    private EditText pseudo, motDePasse;
     private Button connexionButton;
     private TextView lienActiviteInscription;
+    private RetrofitClient mRetrofitClient;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +35,7 @@ public class ConnexionActivity extends AppCompatActivity {
         pseudo = findViewById(R.id.connexion_pseudo);
         motDePasse = findViewById(R.id.connexion_mot_de_passe);
         connexionButton = findViewById(R.id.connexionButton);
+        mRetrofitClient = RetrofitClient.getInstance();
 
         lienActiviteInscription = findViewById(R.id.lien_activite_inscription);
         lienActiviteInscription.setTextColor(Color.BLUE);
@@ -56,7 +66,36 @@ public class ConnexionActivity extends AppCompatActivity {
             motDePasse.requestFocus();
         }
         else {
+            // display a progress dialog
+            final ProgressDialog progressDialog = new ProgressDialog(ConnexionActivity.this);
+            progressDialog.setCancelable(false); // set cancelable to false
+            progressDialog.setMessage("Chargement en cours merci de patienté"); // set message
+            progressDialog.show(); // show progress dialog
+            Api.LoginService loginService = mRetrofitClient.getLoginService();
+            loginService.login(getEditText(pseudo), getEditText(motDePasse), new Callback<Login>() {
+                @Override
+                public void onResponse(Call<Login> call, Response<Login> response) {
+                    if (response.isSuccessful()){
+                        Toast.makeText(ConnexionActivity.this, response.body().message, Toast.LENGTH_LONG).show();
+                        progressDialog.dismiss();
+                        Intent mainActivity = new Intent(ConnexionActivity.this, MainActivity.class);
+                        startActivity(mainActivity);
 
+                    }
+                    else{
+                        progressDialog.dismiss();
+                        pseudo.setError("pseudo ou mot de passe incorrect");
+                        motDePasse.setError("pseudo ou mot de passe incorrect");
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Login> call, Throwable t) {
+                    Log.d("response ", t.getStackTrace().toString());
+                    progressDialog.dismiss();
+                    pseudo.setError(t.getMessage());
+                }
+            });
         }
     }
 
@@ -67,6 +106,12 @@ public class ConnexionActivity extends AppCompatActivity {
      */
     public static String getEditText(EditText editText){
         return editText.getText().toString().trim();
+    }
+
+
+    public class Login {
+        String message;
+        int succes;
     }
 
 }

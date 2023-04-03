@@ -5,15 +5,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
     private static RetrofitClient instance = null;
-    private String BASE_URL = "";
-    private Api myApi;
+    private String BASE_URL = "http://localhost/";
+    private Api.LoginService mLoginService;
 
     private RetrofitClient() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        myApi = retrofit.create(Api.class);
+        mLoginService = retrofit.create(Api.LoginService.class);
     }
 
     public static synchronized RetrofitClient getInstance() {
@@ -23,9 +23,9 @@ public class RetrofitClient {
         return instance;
     }
 
-    public Api getMyApi() {
-        return myApi;
+    public Api.LoginService getLoginService() {
+        return mLoginService;
     }
 }
 
-}
+

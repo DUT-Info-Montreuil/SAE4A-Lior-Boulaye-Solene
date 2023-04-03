@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
         mImageViewLogo = findViewById(R.id.imageView_logo);
         mImageViewProfil = findViewById(R.id.imageView_profil);
-        mEditTextBarreRecherche = findViewById(R.id.editText_recherche);
+        //mEditTextBarreRecherche = findViewById(R.id.editText_recherche);
         mImageViewLoupe = findViewById(R.id.imageView_loupe);
         mButtonCreerRecette = findViewById(R.id.button_creer_recette);
         mImageViewRecetteJour = findViewById(R.id.ImageButton_recette_jour);
@@ -45,8 +45,8 @@ public class MainActivity extends AppCompatActivity {
         mImageViewProfil.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent ProfilActivityIntent = new Intent(MainActivity.this, ProfilActivity.class);
-                startActivityForResult(ProfilActivityIntent, THIS_REQUEST_CODE);
+                Intent InscriptionActivityIntent = new Intent(MainActivity.this, InscriptionActivity.class);
+                startActivity(InscriptionActivityIntent);
             }
         });
 
