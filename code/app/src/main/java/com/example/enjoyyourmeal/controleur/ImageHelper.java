@@ -1,4 +1,4 @@
-package com.example.enjoyyourmeal.modele;
+package com.example.enjoyyourmeal.controleur;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
