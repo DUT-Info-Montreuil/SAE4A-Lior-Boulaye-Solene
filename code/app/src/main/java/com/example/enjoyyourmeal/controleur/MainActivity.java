@@ -12,16 +12,16 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.example.enjoyyourmeal.R;
+import com.example.enjoyyourmeal.modele.Utilisateur;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ImageView mImageViewLogo;
-    private ImageView mImageViewProfil;
+    private ImageView mImageViewLogo, mImageViewProfil, mImageViewLoupe, mImageViewRecetteJour;
     private EditText mEditTextBarreRecherche;
-    private ImageView mImageViewLoupe;
     private Button mButtonCreerRecette;
-    private ImageView mImageViewRecetteJour;
     private static final int THIS_REQUEST_CODE = 42;
+    protected Utilisateur mUtilisateur;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,25 +38,29 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent ConsultProfilActivityIntent = new Intent(MainActivity.this, MainActivity.class);
-                startActivityForResult(ConsultProfilActivityIntent, THIS_REQUEST_CODE);
+                startActivity(ConsultProfilActivityIntent);
             }
         });
 
         mImageViewProfil.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent ProfilActivityIntent = new Intent(MainActivity.this, ProfilActivity.class);
-                startActivityForResult(ProfilActivityIntent, THIS_REQUEST_CODE);
+                if (mUtilisateur == null) {
+                    //Intent ConnexionActivityIntent = new Intent(MainActivity.this, ConnexionActivity.class);
+                    //startActivity(ConnexionActivityIntent);
+                } else {
+                    Intent ProfilActivityIntent = new Intent(MainActivity.this, ProfilActivity.class);
+                    startActivity(ProfilActivityIntent);
+                }
             }
         });
-
-
-
-
-
-
-
-
+        mButtonCreerRecette.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent CreerRecetteActivityIntent = new Intent(MainActivity.this, CreerRecetteActivity.class);
+                startActivity(CreerRecetteActivityIntent);
+            }
+        });
 
         LinearLayout layout = (LinearLayout) findViewById(R.id.linear);
         for (int i = 0; i < 10; i++) {
@@ -66,8 +70,18 @@ public class MainActivity extends AppCompatActivity {
             imageView.setImageBitmap(BitmapFactory.decodeResource(
                     getResources(), R.drawable.photo_profil));
             imageView.setScaleType(ImageView.ScaleType.CENTER);
+            imageView.setClickable(true);
             layout.addView(imageView);
         }
 
     }
+
+    public Utilisateur CreateUtilisateur(String pseudo) {
+        if (mUtilisateur == null) {
+            //mUtilisateur = new Utilisateur(pseudo);
+        }
+        return mUtilisateur;
+    }
+
+
 }

@@ -1,6 +1,6 @@
 package com.example.enjoyyourmeal.modele;
 
-public class Utilsateur {
+public class Utilisateur {
     private String pseudo;
 
 }
