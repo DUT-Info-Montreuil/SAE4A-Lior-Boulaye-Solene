@@ -11,7 +11,7 @@
         android:id="@+id/scroll_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="HorizontalScrollView des types de recettes">
+        android:contentDescription="ScrollView de la page">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -70,12 +70,13 @@
                 android:orientation="horizontal"
                 android:layout_marginTop="25dp"
                 android:background="@drawable/photo_profil">
+
                 <Button
                     android:id="@+id/button_creer_recette"
-                    android:layout_width="120dp"
-                    android:layout_height="60dp"
-                    android:layout_marginTop="80dp"
+                    android:layout_width="113dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
+                    android:layout_marginTop="80dp"
                     android:text="Créer une recette" />
             </LinearLayout>
 
