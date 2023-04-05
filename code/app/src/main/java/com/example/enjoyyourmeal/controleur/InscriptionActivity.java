@@ -23,10 +23,6 @@ import com.example.enjoyyourmeal.modele.exceptions.MotdePasseDifferentException;
 import com.example.enjoyyourmeal.modele.exceptions.MotdePasseTropFaibleException;
 import com.example.enjoyyourmeal.modele.exceptions.pseudoDejaExistantException;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 public class InscriptionActivity extends AppCompatActivity {
 
     private static final int TAILLE_MOT_DE_PASSE = 8;
@@ -34,7 +30,6 @@ public class InscriptionActivity extends AppCompatActivity {
     private Button inscriptionButton;
     private TextView lienActiviteConnection;
     protected Utilisateur mUtilisateur;
-    private RetrofitClient mRetrofitClient;
 
 
 

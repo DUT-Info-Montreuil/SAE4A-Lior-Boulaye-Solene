@@ -50,14 +50,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
-
-
-
-
-
-
         LinearLayout layout = (LinearLayout) findViewById(R.id.linear);
         for (int i = 0; i < 10; i++) {
             ImageView imageView = new ImageView(this);
