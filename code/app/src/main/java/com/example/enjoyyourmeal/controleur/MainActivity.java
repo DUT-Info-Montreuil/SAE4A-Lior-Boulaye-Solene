@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         mButtonCreerRecette = findViewById(R.id.button_creer_recette);
         mImageViewRecetteJour = findViewById(R.id.ImageButton_recette_jour);
 
+        mUtilisateur = new Utilisateur("Joris");
         mImageViewLogo.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -46,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (mUtilisateur == null) {
-                    //Intent ConnexionActivityIntent = new Intent(MainActivity.this, ConnexionActivity.class);
-                    //startActivity(ConnexionActivityIntent);
+                    Intent ConnexionActivityIntent = new Intent(MainActivity.this, ConnexionActivity.class);
+                    startActivity(ConnexionActivityIntent);
                 } else {
                     Intent ProfilActivityIntent = new Intent(MainActivity.this, ProfilActivity.class);
                     startActivity(ProfilActivityIntent);
@@ -78,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
     public Utilisateur CreateUtilisateur(String pseudo) {
         if (mUtilisateur == null) {
-            //mUtilisateur = new Utilisateur(pseudo);
+            mUtilisateur = new Utilisateur(pseudo);
         }
         return mUtilisateur;
     }
