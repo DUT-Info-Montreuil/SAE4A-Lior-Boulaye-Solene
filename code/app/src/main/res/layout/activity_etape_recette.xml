@@ -40,8 +40,8 @@
         android:layout_height="42dp"
         android:ems="10"
         android:inputType="number"
-        tools:layout_editor_absoluteX="283dp"
-        tools:layout_editor_absoluteY="29dp" />
+        tools:layout_editor_absoluteX="281dp"
+        tools:layout_editor_absoluteY="28dp" />
 
     <TextView
         android:id="@+id/textView_etape"
@@ -58,12 +58,12 @@
         android:id="@+id/button_prochaine_etape"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="16dp"
         android:text="Prochaine Etape"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="596dp" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/button_etapePrecedente"
+        tools:layout_editor_absoluteY="593dp" />
 
     <Button
         android:id="@+id/button_accueil"
@@ -75,5 +75,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="654dp" />
+
+    <Button
+        android:id="@+id/button_etapePrecedente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Etape Precedente"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="593dp"
+        tools:visibility="invisible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
