@@ -10,8 +10,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.enjoyyourmeal.API.APIService;
+import com.example.enjoyyourmeal.API.ApiClient;
+import com.example.enjoyyourmeal.API.LoginResponse;
 import com.example.enjoyyourmeal.R;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ConnexionActivity extends AppCompatActivity {
 
@@ -57,6 +65,8 @@ public class ConnexionActivity extends AppCompatActivity {
         }
         else {
 
+            userLogin(getEditText(pseudo),getEditText(motDePasse));
+
         }
     }
 
@@ -67,6 +77,36 @@ public class ConnexionActivity extends AppCompatActivity {
      */
     public static String getEditText(EditText editText){
         return editText.getText().toString().trim();
+    }
+
+    private void userLogin(String username, String password) {
+        APIService apiService = ApiClient.getClient().create(APIService.class);
+
+        Call<LoginResponse> call = apiService.userLogin(username, password);
+        call.enqueue(new Callback<LoginResponse>() {
+            @Override
+            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                if (response.isSuccessful()) {
+                    LoginResponse loginResponse = response.body();
+                    if (loginResponse.isSuccess()) {
+                        // Traitement de la réponse de l'API en cas de succès
+                        Toast.makeText(ConnexionActivity.this, loginResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                    } else {
+                        // Traitement de l'erreur en cas de connexion échouée
+                        Toast.makeText(ConnexionActivity.this, loginResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    // Traitement de l'erreur en cas d'échec de la connexion à l'API
+                    Toast.makeText(ConnexionActivity.this, "Erreur de connexion à l'API", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LoginResponse> call, Throwable t) {
+                // Traitement de l'erreur en cas d'échec de la connexion à l'API
+                Toast.makeText(ConnexionActivity.this, "Erreur de connexion à l'API", Toast.LENGTH_SHORT) .show();
+            }
+        });
     }
 
 }

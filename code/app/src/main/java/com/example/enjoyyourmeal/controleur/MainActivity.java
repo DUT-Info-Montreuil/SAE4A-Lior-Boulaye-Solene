@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         mButtonCreerRecette = findViewById(R.id.button_creer_recette);
         mImageViewRecetteJour = findViewById(R.id.ImageButton_recette_jour);
 
-        mUtilisateur = new Utilisateur("Joris");
+        mUtilisateur = null;
         mImageViewLogo.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
