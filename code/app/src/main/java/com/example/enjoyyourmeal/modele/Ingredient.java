@@ -29,4 +29,8 @@ public class Ingredient {
     public String toString() {
         return mQuantite.toString() + " " + nom;
     }
+
+
+
 }
+
