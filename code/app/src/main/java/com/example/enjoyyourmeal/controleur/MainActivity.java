@@ -19,6 +19,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.example.enjoyyourmeal.R;
+import com.example.enjoyyourmeal.modele.Recette;
+
+import java.io.Serializable;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private Button mButtonCreerRecette;
     private ImageView mImageViewRecetteJour;
     private static final int THIS_REQUEST_CODE = 42;
+    private Recette mRecette;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent RecetteJourActivityIntent = new Intent(MainActivity.this, RecetteActivity.class);
+                RecetteJourActivityIntent.putExtra("recette_du_jour", (Serializable) mRecette);
                 startActivityForResult(RecetteJourActivityIntent, THIS_REQUEST_CODE);
             }
         });

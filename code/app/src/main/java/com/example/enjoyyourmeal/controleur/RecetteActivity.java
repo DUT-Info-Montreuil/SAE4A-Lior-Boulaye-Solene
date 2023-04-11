@@ -42,6 +42,7 @@ public class RecetteActivity extends AppCompatActivity {
     private ArrayList<String> etapes;
     private Recette recette;
     private ArrayAdapter<String> mAdapter_ingredients;
+    Intent intent = getIntent();
 
 
     @SuppressLint("MissingInflatedId")
@@ -78,6 +79,7 @@ public class RecetteActivity extends AppCompatActivity {
 
         mAdapter_ingredients = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,recette.getAdapter_Ingredints_String());
         mListView_ingredients.setAdapter(mAdapter_ingredients);
+        Recette monObjet = (Recette) intent.getSerializableExtra("recette_du_jour"); // Récupérez l'objet à partir de l'intent avec la clé
 
         flecheRetour.setOnClickListener(new Button.OnClickListener() {
             @Override

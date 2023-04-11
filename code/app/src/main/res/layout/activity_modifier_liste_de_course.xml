@@ -6,4 +6,57 @@
     android:layout_height="match_parent"
     tools:context=".controleur.ModifierListeDeCourseActivity">
 
+    <ImageButton
+        android:id="@+id/Button_retour"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:srcCompat="@drawable/fleche_retour"
+        tools:layout_editor_absoluteX="24dp"
+        tools:layout_editor_absoluteY="35dp" />
+
+    <EditText
+        android:id="@+id/editText_nomIngredient"
+        android:layout_width="402dp"
+        android:layout_height="55dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Entrer le nom de l'ingrédient"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="124dp" />
+
+    <EditText
+        android:id="@+id/editText_quantite"
+        android:layout_width="402dp"
+        android:layout_height="55dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Entre la quantité de l'ingrédient"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="221dp" />
+
+    <EditText
+        android:id="@+id/editText_unite"
+        android:layout_width="402dp"
+        android:layout_height="55dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Entrer le nom de l'unite de mesure de l'ingrédient"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="303dp" />
+
+    <Button
+        android:id="@+id/button_ajouterListeDeCourse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ajouter l'ingredient à la liste de course"
+        tools:layout_editor_absoluteX="45dp"
+        tools:layout_editor_absoluteY="422dp" />
+
+    <TextView
+        android:id="@+id/textView_modifierListeDeCourse"
+        android:layout_width="212dp"
+        android:layout_height="31dp"
+        android:text="Modifier la liste de course : "
+        tools:layout_editor_absoluteX="115dp"
+        tools:layout_editor_absoluteY="44dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
