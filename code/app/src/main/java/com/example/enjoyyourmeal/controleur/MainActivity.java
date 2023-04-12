@@ -5,14 +5,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import com.example.enjoyyourmeal.API.APIService;
+import com.example.enjoyyourmeal.API.ApiClient;
+import com.example.enjoyyourmeal.API.LoginResponse;
+import com.example.enjoyyourmeal.API.SessionResponse;
 import com.example.enjoyyourmeal.R;
 import com.example.enjoyyourmeal.modele.Utilisateur;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
         mImageViewRecetteJour = findViewById(R.id.ImageButton_recette_jour);
 
         mUtilisateur = null;
+
+        sessionInit("session");
         mImageViewLogo.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,11 +89,35 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public Utilisateur CreateUtilisateur(String pseudo) {
-        if (mUtilisateur == null) {
-            mUtilisateur = new Utilisateur(pseudo);
-        }
-        return mUtilisateur;
+    private void sessionInit(String session) {
+        APIService apiService = ApiClient.getClient().create(APIService.class);
+        Call<SessionResponse> call = apiService.initSession(session);
+
+        call.enqueue(new Callback<SessionResponse>() {
+            public void onResponse(Call<SessionResponse> call, Response<SessionResponse> response) {
+                if (response.isSuccessful()) {
+                    SessionResponse sessionResponse = response.body();
+                    if (sessionResponse.isSuccess()) {
+                        // Traitement de la réponse de l'API en cas de succès
+                        Toast.makeText(MainActivity.this, sessionResponse.getMessage(), Toast.LENGTH_LONG).show();
+                        //Intent MainActivityIntent = new Intent(ConnexionActivity.this, MainActivity.class);
+                        //startActivity(MainActivityIntent);
+                    } else {
+                        // Traitement de l'erreur en cas de connexion échouée
+                        Toast.makeText(MainActivity.this, sessionResponse.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    // Traitement de l'erreur en cas d'échec de la connexion à l'API
+                    Toast.makeText(MainActivity.this, "Erreur de connexion à l'API(session)", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SessionResponse> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "Erreur de connexion on Failure(session)", Toast.LENGTH_SHORT) .show();
+                Log.e("API_ERROR", "Erreur de connexion à l'API onfailure", t);
+            }
+        });
     }
 
 

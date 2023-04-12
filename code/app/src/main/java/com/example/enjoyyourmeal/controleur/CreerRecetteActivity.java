@@ -71,6 +71,7 @@ public class CreerRecetteActivity extends AppCompatActivity {
         spinnerUnité.setId(idSpinner);
         sousLayout.addView(spinnerUnité);
 
+        // creer ingrédient dans la bd ou liste avant nom ingr String, quantite int, unités String qui l'a créé
         idEditText1++;
         idEditText2++;
         idSpinner++;
