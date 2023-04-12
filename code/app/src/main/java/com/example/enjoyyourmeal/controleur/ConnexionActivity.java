@@ -91,14 +91,13 @@ public class ConnexionActivity extends AppCompatActivity {
                     if (loginResponse.isSuccess()) {
                         // Traitement de la réponse de l'API en cas de succès
                         Toast.makeText(ConnexionActivity.this, loginResponse.getMessage(), Toast.LENGTH_LONG).show();
-                        //Intent MainActivityIntent = new Intent(ConnexionActivity.this, MainActivity.class);
-                        //startActivity(MainActivityIntent);
+                        Intent MainActivityIntent = new Intent(ConnexionActivity.this, MainActivity.class);
+                        startActivity(MainActivityIntent);
                     } else {
                         // Traitement de l'erreur en cas de connexion échouée
                         Toast.makeText(ConnexionActivity.this, loginResponse.getMessage(), Toast.LENGTH_LONG).show();
                         pseudo.setError(loginResponse.getMessage());
                         pseudo.requestFocus();
-
                     }
                 } else {
                     // Traitement de l'erreur en cas d'échec de la connexion à l'API

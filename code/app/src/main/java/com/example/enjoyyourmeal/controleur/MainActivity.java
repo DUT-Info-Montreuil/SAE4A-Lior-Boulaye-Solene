@@ -30,9 +30,8 @@ public class MainActivity extends AppCompatActivity {
     private EditText mEditTextBarreRecherche;
     private Button mButtonCreerRecette;
     private static final int THIS_REQUEST_CODE = 42;
-    protected Utilisateur mUtilisateur;
 
-
+    private String userEnCours = "jeanne";
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -44,21 +43,20 @@ public class MainActivity extends AppCompatActivity {
         mButtonCreerRecette = findViewById(R.id.button_creer_recette);
         mImageViewRecetteJour = findViewById(R.id.ImageButton_recette_jour);
 
-        mUtilisateur = null;
-
-        sessionInit("session");
+        sessionEnCours("session");
         mImageViewLogo.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent ConsultProfilActivityIntent = new Intent(MainActivity.this, MainActivity.class);
-                startActivity(ConsultProfilActivityIntent);
+                Intent ConsultMainActivityIntent = new Intent(MainActivity.this, MainActivity.class);
+                startActivity(ConsultMainActivityIntent);
             }
         });
 
         mImageViewProfil.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mUtilisateur == null) {
+
+                if (userEnCours == "jeanne") {
                     Intent ConnexionActivityIntent = new Intent(MainActivity.this, ConnexionActivity.class);
                     startActivity(ConnexionActivityIntent);
                 } else {
@@ -89,7 +87,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void sessionInit(String session) {
+    private void sessionEnCours(String session) {
+
         APIService apiService = ApiClient.getClient().create(APIService.class);
         Call<SessionResponse> call = apiService.initSession(session);
 
@@ -100,8 +99,6 @@ public class MainActivity extends AppCompatActivity {
                     if (sessionResponse.isSuccess()) {
                         // Traitement de la réponse de l'API en cas de succès
                         Toast.makeText(MainActivity.this, sessionResponse.getMessage(), Toast.LENGTH_LONG).show();
-                        //Intent MainActivityIntent = new Intent(ConnexionActivity.this, MainActivity.class);
-                        //startActivity(MainActivityIntent);
                     } else {
                         // Traitement de l'erreur en cas de connexion échouée
                         Toast.makeText(MainActivity.this, sessionResponse.getMessage(), Toast.LENGTH_LONG).show();
@@ -111,7 +108,6 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Erreur de connexion à l'API(session)", Toast.LENGTH_LONG).show();
                 }
             }
-
             @Override
             public void onFailure(Call<SessionResponse> call, Throwable t) {
                 Toast.makeText(MainActivity.this, "Erreur de connexion on Failure(session)", Toast.LENGTH_SHORT) .show();
@@ -119,6 +115,4 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-
 }

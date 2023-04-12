@@ -17,7 +17,11 @@ public interface APIService {
     Call<LoginResponse> userSignIn(@Field("username") String username, @Field("password") String password, @Field("inscription") String inscription);
 
     @FormUrlEncoded
-    @POST("session.php")
+    @POST("index.php")
     Call<SessionResponse> initSession(@Field("session") String session);
+
+    @FormUrlEncoded
+    @POST("index.php")
+    Call<SessionResponse> deconnexion(@Field("deconnexion") String deconnexion);
 }
 

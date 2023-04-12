@@ -51,8 +51,6 @@ public class InscriptionActivity extends AppCompatActivity {
         lienActiviteConnection.setTextColor(Color.BLUE);
         lienActiviteConnection.setPaintFlags(lienActiviteConnection.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
-        session = null;
-
         lienActiviteConnection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -123,10 +121,11 @@ public class InscriptionActivity extends AppCompatActivity {
                         Toast.makeText(InscriptionActivity.this, loginResponse.getMessage(), Toast.LENGTH_SHORT).show();
                         Intent MainActivityIntent = new Intent(InscriptionActivity.this, MainActivity.class);
                         startActivity(MainActivityIntent);
-                        session = username;
                     } else {
-                        // Traitement de l'erreur en cas de connexion échouée
+                        // Traitement de l'erreur en cas de inscription échouée
                         Toast.makeText(InscriptionActivity.this, loginResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                        pseudo.setError(loginResponse.getMessage());
+                        pseudo.requestFocus();
                     }
                 } else {
                     // Traitement de l'erreur en cas d'échec de la connexion à l'API
