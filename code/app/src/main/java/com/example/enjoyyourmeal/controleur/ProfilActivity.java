@@ -24,6 +24,8 @@ public class ProfilActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profil);
 
+        mesRecetteButton = findViewById(R.id.mes_recette_button);
+        btnDeco = findViewById(R.id.button_deconnexion);
                 mesRecetteButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

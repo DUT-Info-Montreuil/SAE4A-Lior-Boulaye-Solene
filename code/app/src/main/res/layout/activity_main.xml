@@ -27,7 +27,7 @@
                     android:layout_height="50dp"
                     android:layout_marginLeft="100dp"
                     android:contentDescription="logo de EnjoyYourMeal"
-                    android:src="@drawable/logo_nutella" />
+                    android:src="@drawable/logo" />
 
                 <ImageView
                 android:id="@+id/imageView_profil"

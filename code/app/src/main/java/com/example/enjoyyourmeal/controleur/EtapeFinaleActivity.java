@@ -97,6 +97,8 @@ public class EtapeFinaleActivity extends AppCompatActivity {
 
 
                 ajouterRecette(texte1,texte2,"boul",entier3,entier4,entier5);
+                Intent ConsultMainActivityIntent = new Intent(EtapeFinaleActivity.this, MainActivity.class);
+                startActivity(ConsultMainActivityIntent);
             }
         });
     }
