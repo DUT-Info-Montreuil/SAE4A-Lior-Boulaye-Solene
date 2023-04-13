@@ -14,12 +14,18 @@
         android:theme="@style/Theme.EnjoyYourMeal"
         tools:targetApi="31">
         <activity
+            android:name=".controleur.EtapeFinaleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".controleur.EtapePrepaActivity"
+            android:exported="false" />
+        <activity
             android:name=".controleur.CreerRecetteActivity"
             android:exported="false" />
         <activity
             android:name=".controleur.ProfilActivity"
             android:exported="false" />
-          <activity
+        <activity
             android:name=".controleur.ConnexionActivity"
             android:exported="false" />
         <activity

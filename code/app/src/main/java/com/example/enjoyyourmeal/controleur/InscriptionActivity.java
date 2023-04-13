@@ -29,6 +29,8 @@ import retrofit2.Response;
 public class InscriptionActivity extends AppCompatActivity {
 
     private static final int TAILLE_MOT_DE_PASSE = 8;
+
+    private TextView ErrorTextView;
     private EditText pseudo;
     private EditText motDePasse;
     private EditText confirmMotDePasse;
@@ -47,11 +49,9 @@ public class InscriptionActivity extends AppCompatActivity {
         motDePasse = findViewById(R.id.incription_mot_de_passe);
         confirmMotDePasse = findViewById(R.id.confirme_mot_de_passe);
         inscriptionButton = findViewById(R.id.inscriptionButton);
+        ErrorTextView = findViewById(R.id.inscription_error_textview);
         lienActiviteConnection = findViewById(R.id.lien_activite_connexion);
-        lienActiviteConnection.setTextColor(Color.BLUE);
         lienActiviteConnection.setPaintFlags(lienActiviteConnection.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-
-        session = null;
 
         lienActiviteConnection.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,19 +79,13 @@ public class InscriptionActivity extends AppCompatActivity {
             userSignIn(getEditText(pseudo),getEditText(motDePasse));
 
         } catch (pseudoDejaExistantException e) {
-            pseudo.setError("le pseudo choisi est déjà pris  ! \nmerci d'en choisir un autre");
+            ErrorTextView.setText("le pseudo choisi est déjà pris  ! \nmerci d'en choisir un autre");
         } catch (ChampsNonRempliExecption e) {
-            pseudo.setError("Merci de remplir tout les champs");
-            pseudo.requestFocus();
-            motDePasse.setError("Merci de remplir tout les champs");
-            motDePasse.requestFocus();
-            confirmMotDePasse.setError("Merci de remplir tout les champs");
-            confirmMotDePasse.requestFocus();
+            ErrorTextView.setText("Merci de remplir tout les champs");
         } catch (MotdePasseTropFaibleException e) {
-            motDePasse.setError("Le mot de passe doit faire au moins 8 charactère");
+            ErrorTextView.setText("Le mot de passe doit faire au moins 8 charactère");
         } catch (MotdePasseDifferentException e) {
-            motDePasse.setError("Les mots de passe sont différents");
-            confirmMotDePasse.setError("Les mots de passe sont différents");
+            ErrorTextView.setText("Les mots de passe sont différents");
         }
     }
 
@@ -123,10 +117,10 @@ public class InscriptionActivity extends AppCompatActivity {
                         Toast.makeText(InscriptionActivity.this, loginResponse.getMessage(), Toast.LENGTH_SHORT).show();
                         Intent MainActivityIntent = new Intent(InscriptionActivity.this, MainActivity.class);
                         startActivity(MainActivityIntent);
-                        session = username;
                     } else {
-                        // Traitement de l'erreur en cas de connexion échouée
+                        // Traitement de l'erreur en cas de inscription échouée
                         Toast.makeText(InscriptionActivity.this, loginResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                        ErrorTextView.setText(loginResponse.getMessage());
                     }
                 } else {
                     // Traitement de l'erreur en cas d'échec de la connexion à l'API
