@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical"
+    tools:context=".controleur.ConnexionActivity">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="50dp"
+        android:text="Connexion"
+        android:textSize="34sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/connexion_error_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:textColor="#FF0000" />
+    <EditText
+        android:id="@+id/connexion_pseudo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+
+        android:hint="Entrez votre pseudo"
+        android:autofillHints="connexion_username"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+
+        android:id="@+id/connexion_mot_de_passe"
+        android:layout_marginEnd="16dp"
+        android:hint="Entrez votre mot de passe"
+        android:inputType="textPassword"
+        android:autofillHints="password" />
+
+
+    <Button
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:id="@+id/connexionButton"
+
+        android:layout_margin="16dp"
+
+        android:background="@color/purple_200"
+        android:gravity="center"
+        android:text="Se connecter"
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pas encore inscrit ? "
+            />
+
+        <TextView
+            android:id="@+id/lien_activite_inscription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:linksClickable="true"
+            android:text="Inscrivez-vous !"
+            android:textColor="#0000FF" />
+
+    </LinearLayout>
+</LinearLayout>

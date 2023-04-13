@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imageView_photo_profil"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="150dp"
+            android:contentDescription="photo de profil"
+            android:src="@drawable/photo_profil" />
+
+        <ImageView
+            android:id="@+id/imageView_modifier_photo_profil"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="100dp"
+            android:src="@drawable/crayon_modifier"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button_deconnexion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="deconnexion"/>
+
+    <Button
+        android:id="@+id/mes_recette_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mes recettes" />
+
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button" />
+
+    <Button
+        android:id="@+id/frigo_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mon Frigo" />
+
+    <Button
+        android:id="@+id/liste_de_course_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ma liste de course" />
+
+
+</LinearLayout>
