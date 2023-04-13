@@ -36,7 +36,7 @@ public class AfficherListeDeCourseActivity extends AppCompatActivity {
         mButton_modifierListeDeCourse = (Button) findViewById(R.id.button_modifierListeDeCourse);
         mListView_listeDeCourse = (ListView) findViewById(R.id.listeView_listeDeCourse);
         //récuperer liste de course dans la bd
-        mEditText_listeDeCourse.setText(listeDeCourse.toString());
+//        mEditText_listeDeCourse.setText(listeDeCourse.toString());
 
         mButton_retour.setOnClickListener(new Button.OnClickListener() {
             @Override

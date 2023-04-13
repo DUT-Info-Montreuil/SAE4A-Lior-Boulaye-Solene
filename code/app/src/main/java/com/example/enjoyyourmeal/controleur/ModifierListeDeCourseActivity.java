@@ -27,7 +27,7 @@ public class ModifierListeDeCourseActivity extends AppCompatActivity {
     private static final int THIS_REQUEST_CODE = 42;
     private Ingredient mIngredient;
     private Quantite mQuantite;
-    private String nomIngredient, unite, string_quantite;
+    private String nomIngredient, unite, string_quantite="0";
     private int quantite;
     private ListeDeCourse mListeDeCourse;
 
@@ -39,7 +39,7 @@ public class ModifierListeDeCourseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_modifier_liste_de_course);
 
         mButton_ajoutIngredientListeDeCourse = (Button) findViewById(R.id.button_modifierListeDeCourse);
-        mButton_retour = (ImageButton) findViewById(R.id.imageButton_retour);
+        mButton_retour = (ImageButton) findViewById(R.id.Button_retour);
         mTextView_modifierListeDeCourse = (TextView) findViewById(R.id.textView_modifierListeDeCourse);
         mEditText_nomIngredient = (EditText) findViewById(R.id.editText_nomIngredient);
         mEditText_quantite = (EditText) findViewById(R.id.editText_quantite);
@@ -47,13 +47,7 @@ public class ModifierListeDeCourseActivity extends AppCompatActivity {
         nomIngredient = mEditText_nomIngredient.getText().toString();
 
 
-        mButton_retour.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent MainActivityIntent = new Intent(ModifierListeDeCourseActivity.this, MainActivity.class);
-                startActivityForResult(MainActivityIntent, THIS_REQUEST_CODE);
-            }
-        });
+
 
         mButton_retour.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -67,6 +61,14 @@ public class ModifierListeDeCourseActivity extends AppCompatActivity {
 
                 Intent MainActivityIntent = new Intent(ModifierListeDeCourseActivity.this, MainActivity.class);
                 startActivityForResult(MainActivityIntent, THIS_REQUEST_CODE);
+            }
+        });
+
+        mButton_ajoutIngredientListeDeCourse.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent AjouterIngredientListeDeCourse = new Intent(ModifierListeDeCourseActivity.this, MainActivity.class);
+                startActivityForResult(AjouterIngredientListeDeCourse, THIS_REQUEST_CODE);
             }
         });
     }

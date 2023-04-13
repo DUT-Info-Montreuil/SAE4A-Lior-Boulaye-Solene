@@ -37,7 +37,6 @@
     </LinearLayout>
 
 
-    </LinearLayout>
 
     <Button
         android:layout_width="match_parent"
@@ -51,10 +50,10 @@
         android:text="Mon Frigo" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/liste_de_course_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:text="Ma liste de course" />
 
 
 </LinearLayout>

@@ -22,10 +22,13 @@ import android.widget.LinearLayout;
 
 import com.example.enjoyyourmeal.R;
 
+import com.example.enjoyyourmeal.modele.Ingredient;
+import com.example.enjoyyourmeal.modele.Quantite;
 import com.example.enjoyyourmeal.modele.Recette;
 import com.example.enjoyyourmeal.modele.Utilisateur;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,7 +39,14 @@ public class MainActivity extends AppCompatActivity {
     private Button mButtonCreerRecette;
     private ImageView mImageViewRecetteJour;
     private static final int THIS_REQUEST_CODE = 42;
+    private ArrayList<Ingredient> ingredients = new ArrayList<>();
+    private ArrayList<String> etapes = new ArrayList<>();
     private Recette mRecette;
+    private Quantite quantiteFarine;
+    private Quantite quantiteSucre;
+    private Quantite quantiteOeufs;
+    private Quantite quantiteLait;
+
     protected  Utilisateur mUtilisateur;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +63,21 @@ public class MainActivity extends AppCompatActivity {
 
         mUtilisateur = new Utilisateur("Joris");
 
+        ingredients = new ArrayList<>();
+        quantiteFarine = new Quantite("g", 200);
+        quantiteSucre = new Quantite("g", 100);
+        quantiteOeufs = new Quantite("", 2);
+        quantiteLait = new Quantite("ml", 250);
+        ingredients.add(new Ingredient("Farine", quantiteFarine));
+        ingredients.add(new Ingredient("Sucre", quantiteSucre));
+        ingredients.add(new Ingredient("Oeufs", quantiteOeufs));
+        ingredients.add(new Ingredient("Lait", quantiteLait));
+        etapes.add("Mélanger la farine et le sucre dans un saladier.");
+        etapes.add("Ajouter les œufs et le lait, et bien mélanger jusqu'à obtention d'une pâte lisse.");
+        etapes.add("Faire chauffer une poêle antiadhésive et y verser une petite louche de pâte.");
+        etapes.add("Cuire la crêpe des deux côtés jusqu'à ce qu'elle soit dorée.");
+        mRecette = new Recette("Crêpes", "Délicieuses crêpes pour le petit déjeuner", ingredients,
+                etapes, 20, 0, 10, 10, 4);
         mImageViewLogo.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,13 +89,20 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
+        
         mImageViewProfil.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent ProfilActivityIntent = new Intent(MainActivity.this, ProfilActivity.class);
                 startActivityForResult(ProfilActivityIntent, THIS_REQUEST_CODE);
+            }
+        });
+        mImageViewRecetteJour.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent AfficherRecetteActivityIntent = new Intent(MainActivity.this, RecetteActivity.class);
+                AfficherRecetteActivityIntent.putExtra("recette_du_jour", mRecette);
+                startActivity(AfficherRecetteActivityIntent);
             }
         });
 
@@ -93,6 +125,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(CreerRecetteActivityIntent);
             }
         });
+
 
 
         LinearLayout layout = (LinearLayout) findViewById(R.id.linear);
