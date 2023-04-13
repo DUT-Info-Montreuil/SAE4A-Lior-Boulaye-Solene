@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         mImageViewLoupe = findViewById(R.id.imageView_loupe);
         mButtonCreerRecette = findViewById(R.id.button_creer_recette);
         mImageViewRecetteJour = findViewById(R.id.ImageButton_recette_jour);
+
         try {
             in = openFileInput(ProfilActivity.NOM_FICHIER_UTILISATEUR_CONNECTER);
             BufferedReader br = new BufferedReader(new InputStreamReader(in));
@@ -79,8 +80,14 @@ public class MainActivity extends AppCompatActivity {
         mButtonCreerRecette.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent CreerRecetteActivityIntent = new Intent(MainActivity.this, CreerRecetteActivity.class);
-                startActivity(CreerRecetteActivityIntent);
+                if(pseudoUserEnCours.isEmpty()){
+                    Intent ConnexionActivityIntent = new Intent(MainActivity.this, ConnexionActivity.class);
+                    startActivity(ConnexionActivityIntent);
+                }else{
+                    Intent CreerRecetteActivityIntent = new Intent(MainActivity.this, CreerRecetteActivity.class);
+                    startActivity(CreerRecetteActivityIntent);
+                }
+
             }
         });
 

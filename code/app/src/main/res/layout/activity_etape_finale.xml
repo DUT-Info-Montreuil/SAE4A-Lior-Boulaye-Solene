@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <ScrollView
+        android:id="@+id/scroll_view_page_etape"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="ScrollView de la page">
+        <LinearLayout
+            android:id="@+id/linear_du_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="Finalisez votre recette"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="25sp"/>
+            <TextView
+                android:id="@+id/Text1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="Nom de la recette"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="20sp"/>
+
+            <EditText
+                android:id="@+id/editTextNomRecette"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="Name" />
+
+            <TextView
+                android:id="@+id/Text2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="Description de la recette"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="20sp"/>
+
+            <EditText
+                android:id="@+id/editTextDescription"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="Name" />
+
+            <TextView
+                android:id="@+id/Text3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="temps de préparation"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="20sp"/>
+
+            <EditText
+                android:id="@+id/temp_prepa"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:ems="10"
+                android:hint="Entrez le temps de préparation"
+                android:inputType="number" />
+
+            <TextView
+                android:id="@+id/Text4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="temps de cuisson"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="20sp"/>
+            <EditText
+                android:id="@+id/temp_cuisson"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:ems="10"
+                android:inputType="number"
+                android:hint="Entrez le temps de cuisson" />
+
+            <TextView
+                android:id="@+id/Text5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="temps de repos"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="20sp"/>
+            <EditText
+                android:id="@+id/temp_repos"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:ems="10"
+                android:inputType="number"
+                android:hint="Entrez le temps de repos" />
+
+            <Button
+                android:id="@+id/button_creer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:text="Creer votre recette" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

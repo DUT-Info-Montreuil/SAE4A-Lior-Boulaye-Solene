@@ -23,5 +23,32 @@ public interface APIService {
     @FormUrlEncoded
     @POST("index.php")
     Call<SessionResponse> deconnexion(@Field("deconnexion") String deconnexion);
-}
 
+    @FormUrlEncoded
+    @POST("index.php")
+    Call<CreerRecetteResponse> ajoutIngredient(
+            @Field("creerIngredient") String creerIngredient,
+            @Field("nomIngredient") String nomIngredient,
+            @Field("unite") String unite,
+            @Field("nombre") int nombre,
+            @Field("idRecetteIngr") int idRecette);
+
+    @FormUrlEncoded
+    @POST("index.php")
+    Call<CreerRecetteResponse> ajoutEtapePrepa(
+            @Field("creerEtapePrep") String creerEtapePrep,
+            @Field("descriptionEtape") String descriptionEtape,
+            @Field("ordre") int ordre,
+            @Field("idRecettePrep") int idRecette);
+
+    @FormUrlEncoded
+    @POST("index.php")
+    Call<CreerRecetteResponse> ajoutRecette(
+            @Field("creerRecette") String creerRecette,
+            @Field("nomRecette") String nom,
+            @Field("descriptionRecette") String description,
+            @Field("pseudo") String pseudo,
+            @Field("tempPrep") int tempPrep,
+            @Field("tempCuisson") int tempCuisson,
+            @Field("tempRepos") int tempRepos);
+}
