@@ -3,7 +3,6 @@ package com.example.enjoyyourmeal.controleur;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
@@ -16,7 +15,6 @@ import com.example.enjoyyourmeal.API.APIService;
 import com.example.enjoyyourmeal.API.ApiClient;
 import com.example.enjoyyourmeal.API.LoginResponse;
 import com.example.enjoyyourmeal.R;
-import com.example.enjoyyourmeal.modele.Utilisateur;
 import com.example.enjoyyourmeal.modele.exceptions.ChampsNonRempliExecption;
 import com.example.enjoyyourmeal.modele.exceptions.MotdePasseDifferentException;
 import com.example.enjoyyourmeal.modele.exceptions.MotdePasseTropFaibleException;
@@ -36,7 +34,6 @@ public class InscriptionActivity extends AppCompatActivity {
     private EditText confirmMotDePasse;
     private Button inscriptionButton;
     private TextView lienActiviteConnection;
-    private Utilisateur mUtilisateur;
 
     private String session;
 

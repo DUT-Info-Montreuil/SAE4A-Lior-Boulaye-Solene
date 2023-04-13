@@ -65,7 +65,4 @@ public class FrigoActivity extends AppCompatActivity {
         }
     }
 
-    private String mettreEnFormeString(Ingredient ingrédiant){
-        return ingrédiant.getQuantite().toString() + "\n" + ingrédiant.getNom();
-    }
 }

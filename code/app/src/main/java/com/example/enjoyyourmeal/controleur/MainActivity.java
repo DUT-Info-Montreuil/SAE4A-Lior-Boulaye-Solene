@@ -15,7 +15,6 @@ import com.example.enjoyyourmeal.R;
 import com.example.enjoyyourmeal.modele.Ingredient;
 import com.example.enjoyyourmeal.modele.Quantite;
 import com.example.enjoyyourmeal.modele.Recette;
-import com.example.enjoyyourmeal.modele.Utilisateur;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -40,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
     private Quantite quantiteOeufs;
     private Quantite quantiteLait;
 
-    protected  Utilisateur mUtilisateur;
     private FileInputStream in;
 
     public static String pseudoUserEnCours = "";
@@ -54,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
         mImageViewLoupe = findViewById(R.id.imageView_loupe);
         mButtonCreerRecette = findViewById(R.id.button_creer_recette);
         mImageViewRecetteJour = findViewById(R.id.ImageButton_recette_jour);
-        mUtilisateur = new Utilisateur("Joris");
 
 
         ingredients = new ArrayList<>();
@@ -110,16 +107,15 @@ public class MainActivity extends AppCompatActivity {
         mImageViewProfil.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mUtilisateur == null) {
 
-                if(pseudoUserEnCours.isEmpty()){
-                    Intent ConnexionActivityIntent = new Intent(MainActivity.this, ConnexionActivity.class);
-                    startActivity(ConnexionActivityIntent);
-                }else{
-                    Intent ProfilActivityIntent = new Intent(MainActivity.this, ProfilActivity.class);
-                    startActivity(ProfilActivityIntent);
+                    if (pseudoUserEnCours.isEmpty()) {
+                        Intent ConnexionActivityIntent = new Intent(MainActivity.this, ConnexionActivity.class);
+                        startActivity(ConnexionActivityIntent);
+                    } else {
+                        Intent ProfilActivityIntent = new Intent(MainActivity.this, ProfilActivity.class);
+                        startActivity(ProfilActivityIntent);
+                    }
                 }
-            }
         });
         mButtonCreerRecette.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -154,12 +150,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public Utilisateur CreateUtilisateur(String pseudo) {
-        if (mUtilisateur == null) {
-            mUtilisateur = new Utilisateur(pseudo);
-        }
-        return mUtilisateur;
-    }
+
 
 
 

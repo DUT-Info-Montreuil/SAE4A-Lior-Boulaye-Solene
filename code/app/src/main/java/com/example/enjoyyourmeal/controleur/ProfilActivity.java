@@ -39,6 +39,9 @@ public class ProfilActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent ListeCourseActivityIntent = new Intent(ProfilActivity.this, AfficherListeDeCourseActivity.class);
                 startActivity(ListeCourseActivityIntent);
+            }
+        });
+
         btnDeco = findViewById(R.id.button_deconnexion);
         mesRecetteButton = findViewById(R.id.mes_recette_button);
 
