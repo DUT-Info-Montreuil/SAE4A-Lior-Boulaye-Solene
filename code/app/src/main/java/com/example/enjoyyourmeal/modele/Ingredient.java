@@ -1,13 +1,48 @@
 package com.example.enjoyyourmeal.modele;
 
-public class Ingredient {
-    private String nom;
-    private Quantite mQuantite;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-    public Ingredient(String n, Quantite q) {
+public class Ingredient implements Parcelable {
+    private String nom;
+    private int quantite;
+    private String unite;
+
+    public Ingredient(String nom, int quantite, String unite) {
         this.nom = nom;
-        this.mQuantite = q;
+        this.quantite = quantite;
+        this.unite = unite;
     }
+
+    protected Ingredient(Parcel in) {
+        nom = in.readString();
+        quantite = in.readInt();
+        unite = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(nom);
+        dest.writeInt(quantite);
+        dest.writeString(unite);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Ingredient> CREATOR = new Creator<Ingredient>() {
+        @Override
+        public Ingredient createFromParcel(Parcel in) {
+            return new Ingredient(in);
+        }
+
+        @Override
+        public Ingredient[] newArray(int size) {
+            return new Ingredient[size];
+        }
+    };
 
     public String getNom() {
         return nom;
@@ -17,20 +52,19 @@ public class Ingredient {
         this.nom = nom;
     }
 
-    public Quantite getQuantite() {
-        return mQuantite;
+    public int getQuantite() {
+        return quantite;
     }
 
-    public void setQuantite(Quantite quantite) {
-        mQuantite = quantite;
+    public void setQuantite(int quantite) {
+        this.quantite = quantite;
     }
 
-    @Override
-    public String toString() {
-        return mQuantite.toString() + " " + nom;
+    public String getUnite() {
+        return unite;
     }
 
-
-
+    public void setUnite(String unite) {
+        this.unite = unite;
+    }
 }
-
