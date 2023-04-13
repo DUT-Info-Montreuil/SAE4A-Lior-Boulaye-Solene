@@ -21,6 +21,7 @@ import retrofit2.Response;
 public class ProfilActivity extends AppCompatActivity {
 
     Button btnDeco;
+    public static final String NOM_FICHIER_UTILISATEUR_CONNECTER = "sessionEnCours.txt";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,39 +32,12 @@ public class ProfilActivity extends AppCompatActivity {
             btnDeco.setOnClickListener(new View.OnClickListener() {
             @Override
              public void onClick(View view) {
-                deconnexion("deconnexion");
+                deleteFile(NOM_FICHIER_UTILISATEUR_CONNECTER);
                 Intent ConsultMainActivityIntent = new Intent(ProfilActivity.this, MainActivity.class);
                 startActivity(ConsultMainActivityIntent);
             }
         });
     }
 
-    private void deconnexion(String deconnexion) {
-        APIService apiService = ApiClient.getClient().create(APIService.class);
-        Call<SessionResponse> call = apiService.initSession(deconnexion);
-
-        call.enqueue(new Callback<SessionResponse>() {
-            public void onResponse(Call<SessionResponse> call, Response<SessionResponse> response) {
-                if (response.isSuccessful()) {
-                    SessionResponse sessionResponse = response.body();
-                    if (sessionResponse.isSuccess()) {
-                        // Traitement de la réponse de l'API en cas de succès
-                        Toast.makeText(ProfilActivity.this, sessionResponse.getMessage(), Toast.LENGTH_LONG).show();
-                    } else {
-                        // Traitement de l'erreur en cas de connexion échouée
-                        Toast.makeText(ProfilActivity.this, sessionResponse.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                } else {
-                    // Traitement de l'erreur en cas d'échec de la connexion à l'API
-                    Toast.makeText(ProfilActivity.this, "Erreur de connexion à l'API(deconnexion)", Toast.LENGTH_LONG).show();
-                }
-            }
-            @Override
-            public void onFailure(Call<SessionResponse> call, Throwable t) {
-                Toast.makeText(ProfilActivity.this, "Erreur de connexion on Failure(deconnexion)", Toast.LENGTH_SHORT) .show();
-                Log.e("API_ERROR", "Erreur de connexion à l'API onfailure", t);
-            }
-        });
-    }
 }
 

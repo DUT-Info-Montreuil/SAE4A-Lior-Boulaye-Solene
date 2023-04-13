@@ -22,6 +22,14 @@
         android:text="Connexion"
         android:textSize="34sp"
         android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/connexion_error_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:textColor="#FF0000" />
     <EditText
         android:id="@+id/connexion_pseudo"
         android:layout_width="match_parent"
@@ -75,6 +83,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:linksClickable="true"
-            android:text="Inscrivez-vous !" />
+            android:text="Inscrivez-vous !"
+            android:textColor="#0000FF" />
+
     </LinearLayout>
 </LinearLayout>

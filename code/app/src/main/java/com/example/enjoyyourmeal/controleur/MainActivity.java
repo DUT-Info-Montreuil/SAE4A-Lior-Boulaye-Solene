@@ -20,6 +20,10 @@ import com.example.enjoyyourmeal.API.SessionResponse;
 import com.example.enjoyyourmeal.R;
 import com.example.enjoyyourmeal.modele.Utilisateur;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -30,8 +34,9 @@ public class MainActivity extends AppCompatActivity {
     private EditText mEditTextBarreRecherche;
     private Button mButtonCreerRecette;
     private static final int THIS_REQUEST_CODE = 42;
+    private FileInputStream in;
 
-    private String userEnCours = "jeanne";
+    private String pseudoUserEnCours = "";
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -42,8 +47,14 @@ public class MainActivity extends AppCompatActivity {
         mImageViewLoupe = findViewById(R.id.imageView_loupe);
         mButtonCreerRecette = findViewById(R.id.button_creer_recette);
         mImageViewRecetteJour = findViewById(R.id.ImageButton_recette_jour);
-
-        sessionEnCours("session");
+        try {
+            in = openFileInput(ProfilActivity.NOM_FICHIER_UTILISATEUR_CONNECTER);
+            BufferedReader br = new BufferedReader(new InputStreamReader(in));
+            pseudoUserEnCours = br.readLine().split(" ")[0];
+        } catch (Exception e) {
+            pseudoUserEnCours = "";
+        }
+        //sessionEnCours("session");
         mImageViewLogo.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,10 +67,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (userEnCours == "jeanne") {
+                if(pseudoUserEnCours.isEmpty()){
                     Intent ConnexionActivityIntent = new Intent(MainActivity.this, ConnexionActivity.class);
                     startActivity(ConnexionActivityIntent);
-                } else {
+                }else{
                     Intent ProfilActivityIntent = new Intent(MainActivity.this, ProfilActivity.class);
                     startActivity(ProfilActivityIntent);
                 }
@@ -87,32 +98,4 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void sessionEnCours(String session) {
-
-        APIService apiService = ApiClient.getClient().create(APIService.class);
-        Call<SessionResponse> call = apiService.initSession(session);
-
-        call.enqueue(new Callback<SessionResponse>() {
-            public void onResponse(Call<SessionResponse> call, Response<SessionResponse> response) {
-                if (response.isSuccessful()) {
-                    SessionResponse sessionResponse = response.body();
-                    if (sessionResponse.isSuccess()) {
-                        // Traitement de la réponse de l'API en cas de succès
-                        Toast.makeText(MainActivity.this, sessionResponse.getMessage(), Toast.LENGTH_LONG).show();
-                    } else {
-                        // Traitement de l'erreur en cas de connexion échouée
-                        Toast.makeText(MainActivity.this, sessionResponse.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                } else {
-                    // Traitement de l'erreur en cas d'échec de la connexion à l'API
-                    Toast.makeText(MainActivity.this, "Erreur de connexion à l'API(session)", Toast.LENGTH_LONG).show();
-                }
-            }
-            @Override
-            public void onFailure(Call<SessionResponse> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "Erreur de connexion on Failure(session)", Toast.LENGTH_SHORT) .show();
-                Log.e("API_ERROR", "Erreur de connexion à l'API onfailure", t);
-            }
-        });
-    }
 }
