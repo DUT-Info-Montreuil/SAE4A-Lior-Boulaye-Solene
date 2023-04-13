@@ -80,8 +80,14 @@ public class MainActivity extends AppCompatActivity {
         mButtonCreerRecette.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent CreerRecetteActivityIntent = new Intent(MainActivity.this, CreerRecetteActivity.class);
-                startActivity(CreerRecetteActivityIntent);
+                if(pseudoUserEnCours.isEmpty()){
+                    Intent ConnexionActivityIntent = new Intent(MainActivity.this, ConnexionActivity.class);
+                    startActivity(ConnexionActivityIntent);
+                }else{
+                    Intent CreerRecetteActivityIntent = new Intent(MainActivity.this, CreerRecetteActivity.class);
+                    startActivity(CreerRecetteActivityIntent);
+                }
+
             }
         });
 

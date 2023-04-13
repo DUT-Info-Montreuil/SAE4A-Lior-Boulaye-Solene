@@ -85,6 +85,18 @@ public class EtapeFinaleActivity extends AppCompatActivity {
                         }
                     }
                 }
+                String texte1 = edit1.getText().toString();
+                String texte2 = edit2.getText().toString();
+                String texte3 = edit3.getText().toString();
+                String texte4 = edit4.getText().toString();
+                String texte5 = edit5.getText().toString();
+
+                int entier3 = Integer.parseInt(texte3);
+                int entier4 = Integer.parseInt(texte4);
+                int entier5 = Integer.parseInt(texte5);
+
+
+                ajouterRecette(texte1,texte2,"boul",entier3,entier4,entier5);
             }
         });
     }
@@ -180,5 +192,9 @@ public class EtapeFinaleActivity extends AppCompatActivity {
                 Toast.makeText(EtapeFinaleActivity.this, "Erreur ingr on failure", Toast.LENGTH_SHORT) .show();
             }
         });
+    }
+
+    public static String getEditText(EditText editText){
+        return editText.getText().toString().trim();
     }
 }
