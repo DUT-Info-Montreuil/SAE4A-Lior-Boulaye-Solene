@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(ConsultMainActivityIntent);
             }
         });
-        
+
         mImageViewProfil.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {

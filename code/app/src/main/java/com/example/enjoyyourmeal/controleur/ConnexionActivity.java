@@ -16,6 +16,7 @@ import com.example.enjoyyourmeal.API.APIService;
 import com.example.enjoyyourmeal.API.ApiClient;
 import com.example.enjoyyourmeal.API.LoginResponse;
 import com.example.enjoyyourmeal.R;
+import com.example.enjoyyourmeal.modele.Utilisateur;
 
 import java.io.FileOutputStream;
 import java.nio.charset.StandardCharsets;
@@ -67,7 +68,7 @@ public class ConnexionActivity extends AppCompatActivity {
     }
 
     /**
-     * 
+     *
      * @param editText un editText
      * @return le string entre par l'utilsiateur sans espaces au debut et a la fin
      */
