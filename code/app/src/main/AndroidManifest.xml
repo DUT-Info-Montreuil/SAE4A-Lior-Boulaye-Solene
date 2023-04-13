@@ -19,6 +19,9 @@
         <activity
             android:name=".controleur.EtapePrepaActivity"
             android:exported="false" />
+          <activity
+            android:name=".controleur.MesRecetteActivity"
+            android:exported="false" />
         <activity
             android:name=".controleur.CreerRecetteActivity"
             android:exported="false" />

@@ -20,7 +20,7 @@ import retrofit2.Response;
 
 public class ProfilActivity extends AppCompatActivity {
 
-    Button btnDeco;
+    Button btnDeco, mesRecetteButton;
     public static final String NOM_FICHIER_UTILISATEUR_CONNECTER = "sessionEnCours.txt";
 
     @Override
@@ -28,6 +28,14 @@ public class ProfilActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profil);
         btnDeco = findViewById(R.id.button_deconnexion);
+        mesRecetteButton = findViewById(R.id.mes_recette_button);
+
+        mesRecetteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ProfilActivity.this, MesRecetteActivity.class));
+            }
+        });
 
             btnDeco.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int THIS_REQUEST_CODE = 42;
     private FileInputStream in;
 
-    private String pseudoUserEnCours = "";
+    public static String pseudoUserEnCours = "";
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);

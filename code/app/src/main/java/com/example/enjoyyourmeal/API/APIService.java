@@ -1,5 +1,7 @@
 package com.example.enjoyyourmeal.API;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -16,13 +18,12 @@ public interface APIService {
     @POST("index.php")
     Call<LoginResponse> userSignIn(@Field("username") String username, @Field("password") String password, @Field("inscription") String inscription);
 
-    @FormUrlEncoded
-    @POST("index.php")
-    Call<SessionResponse> initSession(@Field("session") String session);
+    @GET("index.php")
+    Call<List<RecetteResponse>> getRecetteUser(@Query("table") String table, @Query("pseudo") String pseudo);
 
-    @FormUrlEncoded
-    @POST("index.php")
-    Call<SessionResponse> deconnexion(@Field("deconnexion") String deconnexion);
+    @GET("index.php")
+    Call<List<RecetteResponse>> getAllRecette(@Query("table") String table);
+
 
     @FormUrlEncoded
     @POST("index.php")
