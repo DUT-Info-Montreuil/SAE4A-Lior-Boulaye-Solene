@@ -12,9 +12,12 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.enjoyyourmeal.R;
+import com.example.enjoyyourmeal.modele.Ingredient;
+import com.example.enjoyyourmeal.modele.Quantite;
 import com.example.enjoyyourmeal.modele.Recette;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class EtapeRecetteActivity extends AppCompatActivity {
     private Recette recette;
@@ -28,6 +31,16 @@ public class EtapeRecetteActivity extends AppCompatActivity {
     private EditText mEditText_nomRecette;
     private EditText mEditText_numEtape;
     private TextView mTextView_etape;
+    private Intent intent = getIntent();
+
+    private Recette mRecette;
+    private Quantite quantiteFarine;
+    private Quantite quantiteSucre;
+    private Quantite quantiteOeufs;
+    private Quantite quantiteLait;
+    private ArrayList<Ingredient> ingredients = new ArrayList<>();
+    private ArrayList<String> etapes = new ArrayList<>();
+
 
 
     @SuppressLint("MissingInflatedId")
@@ -46,10 +59,33 @@ public class EtapeRecetteActivity extends AppCompatActivity {
         mEditTextNumber_numEtape = findViewById(R.id.editTextNumber_numEtape);
         mButton_etape_precedente = findViewById(R.id.button_etapePrecedente);
 
-        mEditText_nomRecette.setText(recette.getTitre());
-        mEditTextNumber_numEtape.setText(num_etape);
-        mTextView_etape.setText(recette.getEtapes().get(num_etape-1));
-        mEditText_numEtape.setText("Etape : ");
+        ingredients = new ArrayList<>();
+        quantiteFarine = new Quantite("g", 200);
+        quantiteSucre = new Quantite("g", 100);
+        quantiteOeufs = new Quantite("", 2);
+        quantiteLait = new Quantite("ml", 250);
+        ingredients.add(new Ingredient("Farine", quantiteFarine));
+        ingredients.add(new Ingredient("Sucre", quantiteSucre));
+        ingredients.add(new Ingredient("Oeufs", quantiteOeufs));
+        ingredients.add(new Ingredient("Lait", quantiteLait));
+        etapes.add("Mélanger la farine et le sucre dans un saladier.");
+        etapes.add("Ajouter les œufs et le lait, et bien mélanger jusqu'à obtention d'une pâte lisse.");
+        etapes.add("Faire chauffer une poêle antiadhésive et y verser une petite louche de pâte.");
+        etapes.add("Cuire la crêpe des deux côtés jusqu'à ce qu'elle soit dorée.");
+        mRecette = new Recette("Crêpes", "Délicieuses crêpes pour le petit déjeuner", ingredients,
+                etapes, 20, 0, 10, 10, 4);
+
+        if (intent != null && intent.hasExtra("recette_du_jour_etape")){
+             recette = (Recette) intent.getParcelableExtra("recette_du_jour_etape"); // Récupérez l'objet à partir de l'intent avec la clé
+
+        }
+        if (recette != null){
+            mEditText_nomRecette.setText(recette.getTitre());
+            mEditTextNumber_numEtape.setText(num_etape);
+            mTextView_etape.setText(recette.getEtapes().get(num_etape-1));
+            mEditText_numEtape.setText("Etape : ");
+
+        }
 
         flecheRetour.setOnClickListener(new Button.OnClickListener() {
             @Override

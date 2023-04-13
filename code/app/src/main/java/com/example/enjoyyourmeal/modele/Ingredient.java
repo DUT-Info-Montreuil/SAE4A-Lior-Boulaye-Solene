@@ -3,34 +3,39 @@ package com.example.enjoyyourmeal.modele;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+
+import androidx.annotation.NonNull;
+
+import java.io.Serializable;
+
+
+
+
 public class Ingredient implements Parcelable {
     private String nom;
     private int quantite;
     private String unite;
+    private Quantite mQuantite;
+
 
     public Ingredient(String nom, int quantite, String unite) {
         this.nom = nom;
         this.quantite = quantite;
         this.unite = unite;
     }
-
+    public Ingredient(String nom, Quantite quantite) {
+        this.nom = nom;
+        this.mQuantite = quantite;
+    }
     protected Ingredient(Parcel in) {
         nom = in.readString();
+        mQuantite = in.readParcelable(Quantite.class.getClassLoader());
+
         quantite = in.readInt();
         unite = in.readString();
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(nom);
-        dest.writeInt(quantite);
-        dest.writeString(unite);
-    }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
 
     public static final Creator<Ingredient> CREATOR = new Creator<Ingredient>() {
         @Override
@@ -43,6 +48,8 @@ public class Ingredient implements Parcelable {
             return new Ingredient[size];
         }
     };
+
+
 
     public String getNom() {
         return nom;
@@ -62,6 +69,19 @@ public class Ingredient implements Parcelable {
 
     public String getUnite() {
         return unite;
+    }
+
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel parcel, int i) {
+        parcel.writeString(nom);
+        parcel.writeParcelable(mQuantite, i);
     }
 
     public void setUnite(String unite) {

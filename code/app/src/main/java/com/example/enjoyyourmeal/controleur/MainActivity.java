@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         mImageViewLoupe = findViewById(R.id.imageView_loupe);
         mButtonCreerRecette = findViewById(R.id.button_creer_recette);
         mImageViewRecetteJour = findViewById(R.id.ImageButton_recette_jour);
-        mUtilisateur = new Utilisateur("Joris");
+
         try {
             in = openFileInput(ProfilActivity.NOM_FICHIER_UTILISATEUR_CONNECTER);
             BufferedReader br = new BufferedReader(new InputStreamReader(in));
@@ -114,8 +114,25 @@ public class MainActivity extends AppCompatActivity {
             ImageView imageView = new ImageView(this);
             imageView.setId(i);
             imageView.setPadding(10, 10, 10, 10);
+            if (i==1) {
+                imageView.setImageBitmap(BitmapFactory.decodeResource(
+                        getResources(), R.drawable.recette_vert));
+                imageView.setScaleType(ImageView.ScaleType.CENTER);
+            }else if (i==2){
+                imageView.setImageBitmap(BitmapFactory.decodeResource(
+                        getResources(), R.drawable.oeuf));
+                imageView.setScaleType(ImageView.ScaleType.CENTER);
+            }else if (i==3){
+                imageView.setImageBitmap(BitmapFactory.decodeResource(
+                        getResources(), R.drawable.crevette));
+                imageView.setScaleType(ImageView.ScaleType.CENTER);
+            }else if (i==4){
+                imageView.setImageBitmap(BitmapFactory.decodeResource(
+                        getResources(), R.drawable.recette_vert));
+                imageView.setScaleType(ImageView.ScaleType.CENTER);
+            }
             imageView.setImageBitmap(BitmapFactory.decodeResource(
-                    getResources(), R.drawable.photo_profil));
+                    getResources(), R.drawable.recette_vert));
             imageView.setScaleType(ImageView.ScaleType.CENTER);
 
             imageView.setClickable(true);
@@ -124,15 +141,4 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
-
-    public Utilisateur CreateUtilisateur(String pseudo) {
-        if (mUtilisateur == null) {
-            mUtilisateur = new Utilisateur(pseudo);
-        }
-        return mUtilisateur;
-    }
-
-
-
 }

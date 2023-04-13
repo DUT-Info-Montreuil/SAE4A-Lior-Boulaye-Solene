@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <ImageButton
+        android:id="@+id/ImageButton_retour"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/fleche_retour" />
+
+    <TextView
+        android:id="@+id/textView_tempsTotal"
+        android:layout_width="92dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="28dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Temps total :"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_commencer_recette"
+        tools:ignore="MissingConstraints,UnknownIdInLayout" />
+
+    <TextView
+        android:id="@+id/textView_tempsPrepa"
+        android:layout_width="133dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="76dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Temps préparation :"
+        app:layout_constraintEnd_toStartOf="@+id/textTextTime_tempsPrepa"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_tempsCuisson"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textView_tempsCuisson"
+        android:layout_width="105dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="6dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Temps cuisson :"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textText_tempsRepos"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textText_tempsRepos"
+        android:layout_width="99dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Temps repos :"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_tempsTotal"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textTextTime_tempsTotal"
+        android:layout_width="80dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="76dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="20"
+        app:layout_constraintStart_toEndOf="@+id/textView_tempsTotal"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints,UnknownId" />
+
+    <TextView
+        android:id="@+id/textTextTime_tempsPrepa"
+        android:layout_width="80dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="92dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="10"
+        app:layout_constraintStart_toEndOf="@+id/textView_tempsPrepa"
+        app:layout_constraintTop_toBottomOf="@+id/textTextTime_tempsTotal"
+        tools:ignore="MissingConstraints,UnknownIdInLayout" />
+
+    <TextView
+        android:id="@+id/textTextTime_tempsCuisson"
+        android:layout_width="80dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="10"
+        app:layout_constraintStart_toEndOf="@+id/textView_tempsCuisson"
+        app:layout_constraintTop_toBottomOf="@+id/textTextTime_tempsRepos"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textTextTime_tempsRepos"
+        android:layout_width="80dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="0"
+        app:layout_constraintStart_toEndOf="@+id/textText_tempsRepos"
+        app:layout_constraintTop_toBottomOf="@+id/textTextTime_tempsTotal"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textView_commencer_recette"
+        android:layout_width="212dp"
+        android:layout_height="31dp"
+        android:text="Commencer la recette "
+        tools:layout_editor_absoluteX="99dp"
+        tools:layout_editor_absoluteY="25dp"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/button_commencer_recette"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:layout_marginEnd="46dp"
+        android:layout_marginBottom="32dp"
+        android:text="Aller a la preparation de la recette"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textView_ingredient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="176dp"
+        android:layout_marginTop="300dp"
+        android:layout_marginEnd="158dp"
+        android:text="Ingredients :"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ListView
+        android:id="@+id/listeView_ingredients"
+        android:layout_width="409dp"
+        android:layout_height="298dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/button_commencer_recette"
+        tools:layout_editor_absoluteX="1dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
