@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         mImageViewLoupe = findViewById(R.id.imageView_loupe);
         mButtonCreerRecette = findViewById(R.id.button_creer_recette);
         mImageViewRecetteJour = findViewById(R.id.ImageButton_recette_jour);
-<<<<<<< Updated upstream
+
         try {
             in = openFileInput(ProfilActivity.NOM_FICHIER_UTILISATEUR_CONNECTER);
             BufferedReader br = new BufferedReader(new InputStreamReader(in));
@@ -55,9 +55,6 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             pseudoUserEnCours = "";
         }
-=======
-
->>>>>>> Stashed changes
         //sessionEnCours("session");
         mImageViewLogo.setOnClickListener(new Button.OnClickListener() {
             @Override
