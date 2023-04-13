@@ -12,6 +12,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.enjoyyourmeal.API.APIService;
+import com.example.enjoyyourmeal.API.ApiClient;
+import com.example.enjoyyourmeal.API.LoginResponse;
 import com.example.enjoyyourmeal.R;
 import com.example.enjoyyourmeal.modele.Utilisateur;
 import com.example.enjoyyourmeal.modele.exceptions.ChampsNonRempliExecption;
@@ -19,15 +22,23 @@ import com.example.enjoyyourmeal.modele.exceptions.MotdePasseDifferentException;
 import com.example.enjoyyourmeal.modele.exceptions.MotdePasseTropFaibleException;
 import com.example.enjoyyourmeal.modele.exceptions.pseudoDejaExistantException;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class InscriptionActivity extends AppCompatActivity {
 
     private static final int TAILLE_MOT_DE_PASSE = 8;
+
+    private TextView ErrorTextView;
     private EditText pseudo;
     private EditText motDePasse;
     private EditText confirmMotDePasse;
     private Button inscriptionButton;
     private TextView lienActiviteConnection;
-    protected Utilisateur mUtilisateur;
+    private Utilisateur mUtilisateur;
+
+    private String session;
 
 
     @Override
@@ -38,8 +49,8 @@ public class InscriptionActivity extends AppCompatActivity {
         motDePasse = findViewById(R.id.incription_mot_de_passe);
         confirmMotDePasse = findViewById(R.id.confirme_mot_de_passe);
         inscriptionButton = findViewById(R.id.inscriptionButton);
+        ErrorTextView = findViewById(R.id.inscription_error_textview);
         lienActiviteConnection = findViewById(R.id.lien_activite_connexion);
-        lienActiviteConnection.setTextColor(Color.BLUE);
         lienActiviteConnection.setPaintFlags(lienActiviteConnection.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
         lienActiviteConnection.setOnClickListener(new View.OnClickListener() {
@@ -58,26 +69,23 @@ public class InscriptionActivity extends AppCompatActivity {
         });
 
     }
+    public static String getEditText(EditText editText){
+        return editText.getText().toString().trim();
+    }
 
     private void inscrire() {
         try {
             inscriptionValide();
-            mUtilisateur = new Utilisateur(ConnexionActivity.getEditText(pseudo));
-            Toast.makeText(this, "Vous être bien inscrit!", Toast.LENGTH_LONG).show();
+            userSignIn(getEditText(pseudo),getEditText(motDePasse));
+
         } catch (pseudoDejaExistantException e) {
-            pseudo.setError("le pseudo choisi est déjà pris  ! \nmerci d'en choisir un autre");
+            ErrorTextView.setText("le pseudo choisi est déjà pris  ! \nmerci d'en choisir un autre");
         } catch (ChampsNonRempliExecption e) {
-            pseudo.setError("Merci de remplir tout les champs");
-            pseudo.requestFocus();
-            motDePasse.setError("Merci de remplir tout les champs");
-            motDePasse.requestFocus();
-            confirmMotDePasse.setError("Merci de remplir tout les champs");
-            confirmMotDePasse.requestFocus();
+            ErrorTextView.setText("Merci de remplir tout les champs");
         } catch (MotdePasseTropFaibleException e) {
-            motDePasse.setError("Le mot de passe doit faire au moins 8 charactère");
+            ErrorTextView.setText("Le mot de passe doit faire au moins 8 charactère");
         } catch (MotdePasseDifferentException e) {
-            motDePasse.setError("Les mots de passe sont différents");
-            confirmMotDePasse.setError("Les mots de passe sont différents");
+            ErrorTextView.setText("Les mots de passe sont différents");
         }
     }
 
@@ -93,6 +101,38 @@ public class InscriptionActivity extends AppCompatActivity {
         if (!ConnexionActivity.getEditText(motDePasse).equals(ConnexionActivity.getEditText(confirmMotDePasse))) {
             throw new MotdePasseDifferentException();
         }
+    }
+
+    private void userSignIn(String username, String password) {
+        APIService apiService = ApiClient.getClient().create(APIService.class);
+
+        Call<LoginResponse> call = apiService.userSignIn(username, password,"inscription");
+        call.enqueue(new Callback<LoginResponse>() {
+            @Override
+            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                if (response.isSuccessful()) {
+                    LoginResponse loginResponse = response.body();
+                    if (loginResponse.isSuccess()) {
+                        // Traitement de la réponse de l'API en cas de succès
+                        Toast.makeText(InscriptionActivity.this, loginResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                        Intent MainActivityIntent = new Intent(InscriptionActivity.this, MainActivity.class);
+                        startActivity(MainActivityIntent);
+                    } else {
+                        // Traitement de l'erreur en cas de inscription échouée
+                        Toast.makeText(InscriptionActivity.this, loginResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                        ErrorTextView.setText(loginResponse.getMessage());
+                    }
+                } else {
+                    // Traitement de l'erreur en cas d'échec de la connexion à l'API
+                    Toast.makeText(InscriptionActivity.this, "Erreur de connexion à l'API", Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<LoginResponse> call, Throwable t) {
+                // Traitement de l'erreur en cas d'échec de la connexion à l'API
+                Toast.makeText(InscriptionActivity.this, "Erreur de connexion à l'API", Toast.LENGTH_SHORT) .show();
+            }
+        });
     }
 
 }

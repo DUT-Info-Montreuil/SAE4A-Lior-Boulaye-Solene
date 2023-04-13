@@ -1,16 +1,5 @@
 package com.example.enjoyyourmeal.controleur;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-
-import android.os.Bundle;
-
-import com.example.enjoyyourmeal.R;
-
-
-import androidx.appcompat.app.AppCompatActivity;
-
-
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -20,15 +9,19 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.example.enjoyyourmeal.R;
+import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.enjoyyourmeal.R;
 import com.example.enjoyyourmeal.modele.Ingredient;
 import com.example.enjoyyourmeal.modele.Quantite;
 import com.example.enjoyyourmeal.modele.Recette;
 import com.example.enjoyyourmeal.modele.Utilisateur;
 
-import java.io.Serializable;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -48,7 +41,9 @@ public class MainActivity extends AppCompatActivity {
     private Quantite quantiteLait;
 
     protected  Utilisateur mUtilisateur;
+    private FileInputStream in;
 
+    public static String pseudoUserEnCours = "";
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -59,9 +54,8 @@ public class MainActivity extends AppCompatActivity {
         mImageViewLoupe = findViewById(R.id.imageView_loupe);
         mButtonCreerRecette = findViewById(R.id.button_creer_recette);
         mImageViewRecetteJour = findViewById(R.id.ImageButton_recette_jour);
-
-
         mUtilisateur = new Utilisateur("Joris");
+
 
         ingredients = new ArrayList<>();
         quantiteFarine = new Quantite("g", 200);
@@ -78,21 +72,28 @@ public class MainActivity extends AppCompatActivity {
         etapes.add("Cuire la crêpe des deux côtés jusqu'à ce qu'elle soit dorée.");
         mRecette = new Recette("Crêpes", "Délicieuses crêpes pour le petit déjeuner", ingredients,
                 etapes, 20, 0, 10, 10, 4);
+
+        try {
+            in = openFileInput(ProfilActivity.NOM_FICHIER_UTILISATEUR_CONNECTER);
+            BufferedReader br = new BufferedReader(new InputStreamReader(in));
+            pseudoUserEnCours = br.readLine().split(" ")[0];
+        } catch (Exception e) {
+            pseudoUserEnCours = "";
+        }
+        //sessionEnCours("session");
+
         mImageViewLogo.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent ConsultProfilActivityIntent = new Intent(MainActivity.this, MainActivity.class);
-
-                startActivityForResult(ConsultProfilActivityIntent, THIS_REQUEST_CODE);
-
-                startActivity(ConsultProfilActivityIntent);
-
+                Intent ConsultMainActivityIntent = new Intent(MainActivity.this, MainActivity.class);
+                startActivity(ConsultMainActivityIntent);
             }
         });
         
         mImageViewProfil.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent ProfilActivityIntent = new Intent(MainActivity.this, ProfilActivity.class);
                 startActivityForResult(ProfilActivityIntent, THIS_REQUEST_CODE);
             }
@@ -110,9 +111,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (mUtilisateur == null) {
+
+                if(pseudoUserEnCours.isEmpty()){
                     Intent ConnexionActivityIntent = new Intent(MainActivity.this, ConnexionActivity.class);
                     startActivity(ConnexionActivityIntent);
-                } else {
+                }else{
                     Intent ProfilActivityIntent = new Intent(MainActivity.this, ProfilActivity.class);
                     startActivity(ProfilActivityIntent);
                 }
@@ -121,8 +124,14 @@ public class MainActivity extends AppCompatActivity {
         mButtonCreerRecette.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent CreerRecetteActivityIntent = new Intent(MainActivity.this, CreerRecetteActivity.class);
-                startActivity(CreerRecetteActivityIntent);
+                if(pseudoUserEnCours.isEmpty()){
+                    Intent ConnexionActivityIntent = new Intent(MainActivity.this, ConnexionActivity.class);
+                    startActivity(ConnexionActivityIntent);
+                }else{
+                    Intent CreerRecetteActivityIntent = new Intent(MainActivity.this, CreerRecetteActivity.class);
+                    startActivity(CreerRecetteActivityIntent);
+                }
+
             }
         });
 

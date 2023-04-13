@@ -73,6 +73,7 @@
             app:srcCompat="@drawable/boutton_rond_plus" />
 
             <Button
+                android:id="@+id/button_etape_prepa"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

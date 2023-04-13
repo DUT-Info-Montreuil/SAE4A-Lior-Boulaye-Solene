@@ -3,23 +3,39 @@ package com.example.enjoyyourmeal.modele;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+
 import androidx.annotation.NonNull;
 
 import java.io.Serializable;
 
+
+
+
 public class Ingredient implements Parcelable {
     private String nom;
+    private int quantite;
+    private String unite;
     private Quantite mQuantite;
 
-    public Ingredient(String n, Quantite q) {
-        this.nom = nom;
-        this.mQuantite = q;
-    }
 
+    public Ingredient(String nom, int quantite, String unite) {
+        this.nom = nom;
+        this.quantite = quantite;
+        this.unite = unite;
+    }
+    public Ingredient(String nom, Quantite quantite) {
+        this.nom = nom;
+        this.mQuantite = quantite;
+    }
     protected Ingredient(Parcel in) {
         nom = in.readString();
         mQuantite = in.readParcelable(Quantite.class.getClassLoader());
+
+        quantite = in.readInt();
+        unite = in.readString();
     }
+
+
 
     public static final Creator<Ingredient> CREATOR = new Creator<Ingredient>() {
         @Override
@@ -33,6 +49,8 @@ public class Ingredient implements Parcelable {
         }
     };
 
+
+
     public String getNom() {
         return nom;
     }
@@ -41,18 +59,18 @@ public class Ingredient implements Parcelable {
         this.nom = nom;
     }
 
-    public Quantite getQuantite() {
-        return mQuantite;
+    public int getQuantite() {
+        return quantite;
     }
 
-    public void setQuantite(Quantite quantite) {
-        mQuantite = quantite;
+    public void setQuantite(int quantite) {
+        this.quantite = quantite;
     }
 
-    @Override
-    public String toString() {
-        return mQuantite.toString() + " " + nom;
+    public String getUnite() {
+        return unite;
     }
+
 
 
     @Override
@@ -65,5 +83,8 @@ public class Ingredient implements Parcelable {
         parcel.writeString(nom);
         parcel.writeParcelable(mQuantite, i);
     }
-}
 
+    public void setUnite(String unite) {
+        this.unite = unite;
+    }
+}
